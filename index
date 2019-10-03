@@ -1,5 +1,7 @@
 <html>
 <header>
+<link rel="stylesheet" href="style.css" />
+<script src="timeline.js"></script>
 </header>
 <body>
 <section id="timeline">
