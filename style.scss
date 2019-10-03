@@ -1,0 +1,144 @@
+$zero: #FBFCFC
+// $one: #FFC107
+$two: #34495E
+$three: #F1C40F
+$four: #C0392B
+
+html
+	background-color: $two
+	font-family: 'Raleway'
+	color: $zero
+section
+	width: 100%
+	box-sizing: border-box
+	min-height: 33vh
+	.section-wrapper
+		padding: 10px
+		box-sizing: border-box
+		height: 100%
+#timeline
+	padding-top: 50px
+	padding-bottom: 50px
+	background-color: $three
+	color: $two
+#timeline-slider-wrapper
+	position: relative
+	top: 11vh
+	left: 5%
+	height: 3px
+	background-color: $zero
+	width: 90%
+	=circle
+		background-color: $zero
+		border-radius: 50%
+		float: left
+		position: relative
+		left: 5.3% // (line width / # of dots)
+		top: -6px
+		box-sizing: border-box
+		width: 14px
+		height: 14px
+		// MARGINS
+		// (((line width ÷ # of dots) ÷ 2) - (dot width ÷ 2))
+		// = (((0.9 ÷ 17) ÷ 2) - (14 ÷ 2))
+		// = (2.65% - 7px)
+		// 2.65% fudged slightly to 2.725% to make up for fact that range input thumb
+		// is not centered over beginning/end of line in initial and final position,
+		// but rather is left- or right-aligned
+		margin-right: calc(2.725% - 7px)
+		margin-left: calc(2.725% - 7px)
+	.dot
+		+circle
+		&:first-child
+			margin-left: calc(1.3625% - 7px)
+		&:nth-child(17)
+			margin-right: calc(1.3625% - 7px)
+	.year
+		&::before
+			content: attr(data-labeltop)
+			position: absolute
+			top: -75px
+			left: -15px
+			width: 140px
+			transform: rotateZ(-45deg)
+			display: block
+			font-size: 0.8em
+			font-weight: bold
+		&::after
+			content: attr(data-labelbottom)
+			position: absolute
+			top: 23px
+			left: -20px
+			padding: 10px
+#slider
+	margin-top: 0
+	margin-bottom: 50px
+	width: 90%
+	position: relative
+	z-index: 1
+	top: -26px
+	left: 5%
+#description
+	min-height: 30vh
+	background-color: $two
+	h3
+		color: $four
+		font-weight: 600
+	.section-wrapper > div
+		display: none
+		&.text-default
+			display: block
+
+/* RANGE INPUT
+ * https://css-tricks.com/styling-cross-browser-
+ * compatible-range-inputs-css/
+ * /
+
+// basic styles for cross-browser range input
+input[type="range"]::-webkit-slider-thumb
+	-webkit-appearance: none
+input[type="range"]
+	-webkit-appearance: none
+	background: transparent
+	width: 100%
+input[type="range"]:focus
+	outline: none
+input[type="range"]::-ms-track
+	width: 100%
+	cursor: pointer
+	background: transparent
+	border-color: transparent
+	color: transparent
+
+// styles for our specific range input
+
+// the circle you click and drag
+=timeline-slider-thumb
+	height: 25px
+	width: 25px
+	border-radius: 50%
+	background: $two
+	border: 2px solid $zero
+	cursor: pointer
+
+input[type="range"]::-webkit-slider-thumb
+	+timeline-slider-thumb
+	margin-top: -13px
+input[type="range"]::-moz-range-thumb
+	+timeline-slider-thumb
+input[type="range"]::-ms-thumb
+	+timeline-slider-thumb
+
+// the track the circle sits on
+=timeline-slider-track
+	width: 100%
+	cursor: pointer
+	height: 2px
+	background: $zero
+
+input[type="range"]::-webkit-slider-runnable-track
+	+timeline-slider-track
+input[type="range"]::-moz-range-track
+	+timeline-slider-track
+input[type="range"]::-ms-track
+	+timeline-slider-track
